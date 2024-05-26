@@ -29,6 +29,12 @@ async function run() {
 
     const craftCollection = client.db("cradtDB").collection("craft");
 
+    app.get("/addcraft", async(req, res) => {
+      const cursor = craftCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    })
+
     app.post("/addcraft", async(req, res) => {
       const newCraft = req.body;
       const result = await craftCollection.insertOne(newCraft);
