@@ -39,8 +39,16 @@ async function run() {
     app.get("/addcraft/:id", async(req, res) => {
       const id = req.params.id;
       const qurey = {_id: new ObjectId(id)}
-      const paint = await craftCollection.findOne(qurey);
-      res.send(paint);
+      const result = await craftCollection.findOne(qurey);
+      res.send(result);
+    })
+
+    app.get("/myartlist/:email", async(req, res) => {
+      const email = req.params.email;
+      const qurey = {user_email: email};
+      const cursor = craftCollection.find(qurey);
+      const result = await cursor.toArray();
+      res.send(result);
     })
 
     app.post("/addcraft", async(req, res) => {
