@@ -38,7 +38,7 @@ async function run() {
 
     app.get("/addcraft/:id", async(req, res) => {
       const id = req.params.id;
-      const qurey = {_id: new ObjectId(id)}
+      const qurey = {_id: new ObjectId(id)};
       const result = await craftCollection.findOne(qurey);
       res.send(result);
     })
@@ -54,6 +54,13 @@ async function run() {
     app.post("/addcraft", async(req, res) => {
       const newCraft = req.body;
       const result = await craftCollection.insertOne(newCraft);
+      res.send(result);
+    })
+
+    app.delete("/addcraft/:id", async(req, res) => {
+      const id = req.params.id;
+      const qurey = {_id: new ObjectId(id)};
+      const result = await craftCollection.deleteOne(qurey);
       res.send(result);
     })
 
