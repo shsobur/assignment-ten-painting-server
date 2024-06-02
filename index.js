@@ -70,7 +70,22 @@ async function run() {
       const options = { upsert : true }
       const updatedCraft = req.body;
 
-      
+      const craftPaint = {
+        $set: {
+          image: updatedCraft.image,
+          item_name: updatedCraft.item_name,
+          subcategory_name: updatedCraft.subcategory_name,
+          price: updatedCraft.price,
+          rating: updatedCraft.rating,
+          customization: updatedCraft.customization,
+          processing_time: updatedCraft.processing_time,
+          stock_status: updatedCraft.stock_status,
+          description: updatedCraft.description,
+        }
+      }
+
+      const result = await craftCollection.updateOne(filter, craftPaint, options);
+      res.send (result);
 
     })
 
